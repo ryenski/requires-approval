@@ -1,0 +1,24 @@
+published:
+  id: 1
+  name: published
+  visible: 1
+
+draft:
+  id: 2
+  name: draft
+  visible: 0
+  
+pending:
+  id: 3
+  name: pending
+  visible: 0
+
+declined:
+  id: 4
+  name: declined
+  visible: 0
+
+spam: 
+  id: 5
+  name: spam
+  visible: 0

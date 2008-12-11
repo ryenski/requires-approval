@@ -1,0 +1,40 @@
+first:
+  id: 1
+  title: First Article
+  permalink: first
+  created_at: <%= Time.now - 4.days %>
+  approval_status_id: 1
+  
+second:
+  id: 2 
+  title: Second Article
+  permalink: second
+  created_at: <%= Time.now - 2.day %>
+  approval_status_id: 1
+  
+third:
+  id: 3
+  title: Third Article
+  permalink: third
+  created_at: <%= Time.now - 2.hours %>
+  approval_status_id: 1
+  
+draft:
+  id: 4
+  title: Draft Article
+  permalink: draft
+  created_at: <%= Time.now - 3.weeks %>
+  approval_status_id: 2
+
+needs_approval:
+  id: 5
+  title: Needs Approval
+  permalink: needs_approval
+  created_at: <%= Time.now - 3.weeks %>
+
+pending_article:
+  id: 6
+  title: This one's pending
+  permalink: pending
+  created_at: <%= Time.now - 3.weeks %>
+  approval_status_id: 3

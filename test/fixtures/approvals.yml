@@ -1,0 +1,31 @@
+first_approved:
+  id: 100
+  approvable_type: AbstractArticle
+  approvable_id: 1
+  approval_status_id: 1
+
+second_approved: 
+  id: 200
+  approvable_type: AbstractArticle
+  approvable_id: 2
+  approval_status_id: 1
+  
+third_approved:
+  id: 300
+  approvable_type: AbstractArticle
+  approvable_id: 3
+  approval_status_id: 1
+  
+draft: 
+  id: 400
+  approvable_type: AbstractArticle
+  approvable_id: 4
+  approval_status_id: 2
+  
+pending: 
+  id: 500
+  approvable_type: AbstractArticle
+  approvable_id: 6
+  approval_status_id: 3
+  
+  

@@ -1,0 +1,83 @@
+THIS PLUGIN IS NO LONGER BEING MAINTAINED. FEEL FREE TO USE IT, BUT WE CANNOT PROVIDE SUPPORT. 
+
+= RequiresApproval
+
+== Simple approval system for any ActiveRecord model
+
+RequiresApproval allows objects to be marked as "published", "pending", "draft", "declined", "spam", or any other status that you choose to set up. Simply say @object.published! and voila! 
+
+RequiresApproval also keeps track of past approvals; there is a record of both actions taken, when, and by which user. So, for example, you can see when an item was marked as "published", and that it was previously marked as "pending", and before that as "draft". 
+
+== Installing
+
+./script/plugin install -x http://svn.artofmission.com/svn/plugins/requires_approval
+
+== Usage
+
+To use, simply add "requires_approval" to your model like so:
+
+  class Article < ActiveRecord::Base
+     requires_approval
+  end
+  
+To approve a record, simply call its #publish! method. For example: 
+
+  * @article.published!
+  * @article.draft!
+  * @article.declined!
+  * @article.pending!
+  * @article.spam!
+
+To find out if an object if it is approved, simply ask it. For example: 
+
+  * @article.published?    #=> true or false
+  * @article.draft?        #=> true or false
+  * @article.declined?     #=> true or false
+  * @article.pending?      #=> true or false
+  * @article.spam?         #=> true or false
+
+You can also find out an object's status by asking for its #status method like this: 
+  
+  @article.published! 
+  @article.status #=> "published"
+
+To return all objects with a certain ApprovalStatus, use Article#find_published like this: 
+  
+  * Article.find_published
+  * Article.find_draft
+  * Article.find_declined
+  * Article.find_pending
+  * Article.find_spam
+  
+To select a particular object if it is approved, use Article#find_published(id)
+
+== Caveats
+
+RequiresApproval assumes that you have some way of automatically storing the id of the user creating the record in the field called "created_by". If this is not the case for your application, you might have to make some modifications. 
+
+== Migrating
+
+You'll need to add the following migration: 
+  
+  create_table :approvals do |t|
+    t.column :approvable_type,      :string                
+    t.column :approvable_id,        :integer              
+    t.column :approval_status_id,   :integer               
+    t.column :created_at,           :datetime              
+    t.column :expires_at,           :datetime              
+    t.column :created_by,           :integer               
+  end
+
+  create_table "approval_statuses", :force => true do |t|
+    t.column :name,                 :string
+    t.column :visible,              :boolean
+  end
+
+  # Create some initial ApprovalStatuses
+  ApprovalStatus.create(:name => "published", :visible => true)
+  ApprovalStatus.create(:name => "draft",     :visible => false)
+  ApprovalStatus.create(:name => "pending",   :visible => false)
+  ApprovalStatus.create(:name => "declined",  :visible => false)
+  ApprovalStatus.create(:name => "spam",      :visible => false)
+
+  # Add database indexes as appropriate
